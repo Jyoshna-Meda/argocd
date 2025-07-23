@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mynginx
+  namespace: argocd
+spec:
+  project: dev-team
+  source:
+    repoURL: https://github.com/Jyoshna-Meda/argocd/
+    path: nginx
+    targetRevision: main
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
